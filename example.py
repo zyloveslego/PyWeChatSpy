@@ -79,6 +79,12 @@ def handle_response(data):
             timestamp = message.timestamp  # 消息时间戳
             if _type == 1:  # 文本消息
                 print(_from, _to, _from_group_member, content)
+                # 设置关键词
+                word_list = ["收", "买", "出", "要"]
+                if any(word in content for word in word_list):
+                    # print("filehelper", "From: " + _from + "\nFrom_group_member: " + _from_group_member + "\nContent: " + content)
+                    spy.send_text("wxid_v5tnpzf6fvre21",
+                                  "From: " + _from + "\nFrom_group_member: " + _from_group_member + "\nContent: " + content)
                 if _to == "filehelper":
                     spy.send_text("filehelper", "Hello PyWeChatSpy3.0\n" + content)
                     time.sleep(2)
